@@ -41,10 +41,9 @@ const plans = [
 ];
 
 export const AccountBillingSettings = (props) => {
-  const [isEditable, setEditable] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [selected, setSelected] = useState("Standard");
 
-  
   return (
     <div {...props}>
       <Card>
@@ -128,8 +127,8 @@ export const AccountBillingSettings = (props) => {
           >
             <Typography variant="h6">Billing details</Typography>
             <Button
-             onClick={() => setEditing(true)}
-              onBlur={() => setEditable(false)}
+              onClick={() => setEditing(true)}
+              onBlur={() => setEditing(false)}
               startIcon={<PencilIcon fontSize="small" />}
             >
               Edit
