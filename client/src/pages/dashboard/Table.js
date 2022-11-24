@@ -395,19 +395,17 @@ const TableXml = () => {
   return (
     <div>
       <div>
-        <Button component="label">
-          <input
-            style={{
-              color: "primary",
-              border: "1px solid rgba(255,255,255,0.3)",
-            }}
-            type="file"
-            id="file"
-            className="input-file"
-            accept=".xml"
-            onChange={(e) => handleFileChosen(e.target.files[0])}
-          />
-        </Button>
+        <input
+          style={{
+            color: "inherit",
+            border: "1px solid rgba(255,255,255,0.3)",
+          }}
+          type="file"
+          id="file"
+          className="input-file"
+          accept=".xml"
+          onChange={(e) => handleFileChosen(e.target.files[0])}
+        />
       </div>
       <div
         className="tablecontainer"

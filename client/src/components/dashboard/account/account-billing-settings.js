@@ -6,6 +6,7 @@ import {
   CardContent,
   Divider,
   Link,
+  TextField,
   Grid,
   Table,
   TableCell,
@@ -14,6 +15,7 @@ import {
   Typography,
   TableBody,
 } from "@mui/material";
+
 import { Logo } from "../../logo";
 import { Pencil as PencilIcon } from "../../../icons/pencil";
 import { PropertyList } from "../../property-list";
@@ -41,8 +43,12 @@ const plans = [
 ];
 
 export const AccountBillingSettings = (props) => {
-  const [editing, setEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [selected, setSelected] = useState("Standard");
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
 
   return (
     <div {...props}>
@@ -127,13 +133,13 @@ export const AccountBillingSettings = (props) => {
           >
             <Typography variant="h6">Billing details</Typography>
             <Button
-              onClick={() => setEditing(true)}
-              onBlur={() => setEditing(false)}
+              onClick={handleEdit}
               startIcon={<PencilIcon fontSize="small" />}
             >
               Edit
             </Button>
           </Box>
+
           <Box
             sx={{
               border: 1,
@@ -142,32 +148,61 @@ export const AccountBillingSettings = (props) => {
               mt: 3,
             }}
           >
-            <PropertyList>
-              <PropertyListItem
-                align="horizontal"
-                divider
-                label="Billing name"
-                value="John Doe"
-              />
-              <PropertyListItem
-                align="horizontal"
-                divider
-                label="Card number"
-                value="**** 1111"
-              />
-              <PropertyListItem
-                align="horizontal"
-                divider
-                label="Country"
-                value="Germany"
-              />
-              <PropertyListItem
-                align="horizontal"
-                label="Zip / Postal code"
-                value="667123"
-              />
-            </PropertyList>
+            {!isEditing ? (
+              <PropertyList>
+                <PropertyListItem
+                  align="horizontal"
+                  divider
+                  label="Billing name"
+                  value="John Doe"
+                />
+                <PropertyListItem
+                  align="horizontal"
+                  divider
+                  label="Card number"
+                  value="**** 1111"
+                />
+                <PropertyListItem
+                  align="horizontal"
+                  divider
+                  label="Country"
+                  value="Germany"
+                />
+                <PropertyListItem
+                  align="horizontal"
+                  label="Zip / Postal code"
+                  value="667123"
+                />
+              </PropertyList>
+            ) : (
+              <PropertyList>
+                <PropertyListItem
+                  align="horizontal"
+                  divider
+                  label="Billing name"
+                  value={<TextField></TextField>}
+                />
+                <PropertyListItem
+                  align="horizontal"
+                  divider
+                  label="Card number"
+                  value={<TextField></TextField>}
+                />
+                <PropertyListItem
+                  align="horizontal"
+                  divider
+                  label="Country"
+                  value={<TextField></TextField>}
+                />
+                <PropertyListItem
+                  align="horizontal"
+                  label="Zip / Postal code"
+                  value={<TextField></TextField>}
+                />
+              </PropertyList>
+            )}
           </Box>
+
           <Box
             sx={{
               alignItems: "center",
@@ -192,7 +227,9 @@ export const AccountBillingSettings = (props) => {
               justifyContent: "flex-end",
             }}
           >
-            <Button variant="contained">Upgrade Plan</Button>
+            <Button variant="contained" href="/UpgradePlan">
+              Upgrade Plan
+            </Button>
           </Box>
         </CardContent>
       </Card>
