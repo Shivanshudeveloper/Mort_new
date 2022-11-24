@@ -398,7 +398,7 @@ const TableXml = () => {
         <input
           style={{
             backgroundColor: "#5048E5",
-            color:"white",
+            color: "white",
             border: "1px solid rgba(255,255,255,0.3)",
           }}
           type="file"
@@ -418,7 +418,8 @@ const TableXml = () => {
               return (
                 <th
                   style={{
-                    minWidth: "320px",
+                    minWidth: "32px",
+                    rowSpan: "5",
                     border: "1px solid rgba(255,255,255,0.3)",
                     minHeight: "20px",
                     borderRight: "none",
@@ -444,7 +445,7 @@ const TableXml = () => {
                     <td
                       style={{
                         textAlign: "center",
-                        minWidth: "320px",
+                        minWidth: "32px",
                         border: "1px solid rgba(255,255,255,0.3)",
                         minHeight: "20px",
                         borderRight: "none",
@@ -478,7 +479,7 @@ const TableXml = () => {
                     <td
                       style={{
                         textAlign: "center",
-                        minWidth: "320px",
+                        minWidth: "32px",
                         border: "1px solid rgba(255,255,255,0.3)",
                         minHeight: "20px",
                         borderRight: "none",
