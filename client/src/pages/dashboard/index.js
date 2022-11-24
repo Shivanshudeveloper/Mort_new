@@ -187,14 +187,14 @@ const Overview = () => {
         <title>Dashboard: Overview | Material Kit Pro</title>
       </Head>
       <Container>
-        <Grid
+        {/* <Grid
           height="300px"
           display="flex"
           alignItems="center"
           justifyContent="space-between"
           style={{ maxWidth: 1200, overflow: "auto" }}
-        >
-          {/* <Grid item padding="16px" margin="16px">
+        > */}
+        {/* <Grid item padding="16px" margin="16px">
             <img src="" width="240px" height="100px" />
           </Grid>
           <Grid item padding="16px" margin="16px">
@@ -212,7 +212,7 @@ const Overview = () => {
           <Grid item padding="16px" margin="16px">
             <img src="" width="200px" height="100px" />
           </Grid> */}
-        </Grid>
+        {/* </Grid> */}
         <Typography
           marginTop="40px"
           marginBottom="40px"
