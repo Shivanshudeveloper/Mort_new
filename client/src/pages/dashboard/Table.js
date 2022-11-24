@@ -397,7 +397,8 @@ const TableXml = () => {
       <div>
         <input
           style={{
-            color: "inherit",
+            backgroundColor: "#5048E5",
+            color:"white",
             border: "1px solid rgba(255,255,255,0.3)",
           }}
           type="file"
