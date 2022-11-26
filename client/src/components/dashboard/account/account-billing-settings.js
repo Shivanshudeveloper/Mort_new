@@ -227,9 +227,11 @@ export const AccountBillingSettings = (props) => {
               justifyContent: "flex-end",
             }}
           >
-            <Button variant="contained" href="/UpgradePlan">
+            <Link href="/UpgradePlan">
+            <Button variant="contained" >
               Upgrade Plan
             </Button>
+            </Link>
           </Box>
         </CardContent>
       </Card>
