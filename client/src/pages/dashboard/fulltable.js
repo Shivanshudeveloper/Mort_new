@@ -1,6 +1,7 @@
 import React from "react";
 
-function fulltable() {
+function fulltable(props) {
+  console.log("hi", props);
   return <div>All Records</div>;
 }
 

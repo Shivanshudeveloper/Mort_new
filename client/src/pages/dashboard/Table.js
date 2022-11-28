@@ -374,8 +374,6 @@ const TableXml = () => {
   const [ivar, seti] = useState(0);
   const [showMore, setShowMore] = useState(false);
 
-  const router = useRouter();
-
   const Datasender = (xml) => {
     const datatosend = {};
     columnsTable.map((column) => {
@@ -400,7 +398,7 @@ const TableXml = () => {
     <div>
       <Link href="/dashboard/fulltable">
         <Button
-          onClick={() => {
+          onClick={(props) => {
             setShowMore(!showMore);
           }}
         >
