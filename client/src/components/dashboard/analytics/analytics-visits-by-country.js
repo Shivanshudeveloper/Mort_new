@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import numeral from 'numeral';
+import { useState } from "react";
+import numeral from "numeral";
 import {
   Box,
   Button,
@@ -20,15 +20,15 @@ import {
   TableSortLabel,
   TextField,
   Tooltip,
-  Typography
-} from '@mui/material';
-import { InformationCircleOutlined as InformationCircleOutlinedIcon } from '../../../icons/information-circle-outlined';
-import { ArrowRight as ArrowRightIcon } from '../../../icons/arrow-right';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+  Typography,
+} from "@mui/material";
+import { InformationCircleOutlined as InformationCircleOutlinedIcon } from "../../../icons/information-circle-outlined";
+import { ArrowRight as ArrowRightIcon } from "../../../icons/arrow-right";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-const sortCountries = (countries, order) => countries
-  .sort((a, b) => {
-    if (order === 'asc') {
+const sortCountries = (countries, order) =>
+  countries.sort((a, b) => {
+    if (order === "asc") {
       return a.visits < b.visits ? -1 : 1;
     }
 
@@ -37,28 +37,28 @@ const sortCountries = (countries, order) => countries
 
 const countries = [
   {
-    flag: '/static/icons/ny.png',
-    name: 'New York',
-    seo: 40,
-    visits: 31200
+    flag: "/static/icons/ny.png",
+    name: "New York",
+    seo: 0,
+    visits: 0,
   },
   {
-    flag: '/static/icons/oh.png',
-    name: 'Ohio',
-    seo: 47,
-    visits: 12700
+    flag: "/static/icons/oh.png",
+    name: "Ohio",
+    seo: 0,
+    visits: 0,
   },
   {
-    flag: '/static/icons/mo.png',
-    name: 'Missouri',
-    seo: 65,
-    visits: 10360
+    flag: "/static/icons/mo.png",
+    name: "Missouri",
+    seo: 0,
+    visits: 0,
   },
   {
-    flag: '/static/icons/fl.png',
-    name: 'Florida',
-    seo: 23,
-    visits: 5749
+    flag: "/static/icons/fl.png",
+    name: "Florida",
+    seo: 0,
+    visits: 0,
   },
   // {
   //   flag: '/static/icons/de_flag.svg',
@@ -75,15 +75,15 @@ const countries = [
 ];
 
 export const AnalyticsVisitsByCountry = (props) => {
-  const [order, setOrder] = useState('desc');
+  const [order, setOrder] = useState("desc");
 
   const handleSort = () => {
     setOrder((prevOrder) => {
-      if (prevOrder === 'asc') {
-        return 'desc';
+      if (prevOrder === "asc") {
+        return "desc";
       }
 
-      return 'asc';
+      return "asc";
     });
   };
 
@@ -109,26 +109,30 @@ export const AnalyticsVisitsByCountry = (props) => {
       flag: URL.createObjectURL(selectedImage),
       name: state,
       seo: seo,
-      visits: value
+      visits: value,
     });
 
     handleClose();
-  }
+  };
 
   return (
     <Card {...props}>
       <CardHeader
         title="Keywords by country"
-        action={(
+        action={
           <>
-            <Tooltip title="Refresh rate is 24h" style={{marginRight:'8px'}}>
-              <InformationCircleOutlinedIcon sx={{ color: 'action.active' }} />
+            <Tooltip title="Refresh rate is 24h" style={{ marginRight: "8px" }}>
+              <InformationCircleOutlinedIcon sx={{ color: "action.active" }} />
             </Tooltip>
-            <Tooltip title="Add State" style={{cursor:'pointer'}} onClick={handleClickOpen}>
-              <AddCircleOutlineIcon sx={{ color: 'action.active' }} />
+            <Tooltip
+              title="Add State"
+              style={{ cursor: "pointer" }}
+              onClick={handleClickOpen}
+            >
+              <AddCircleOutlineIcon sx={{ color: "action.active" }} />
             </Tooltip>
           </>
-        )}
+        }
       />
 
       <Dialog open={open} onClose={handleClose}>
@@ -138,8 +142,8 @@ export const AnalyticsVisitsByCountry = (props) => {
             Add state or region
           </DialogContentText> */}
           <Typography>Upload Flag</Typography>
-          <input 
-            type='file'
+          <input
+            type="file"
             onChange={(event) => {
               // console.log(event.target.files[0]);
               setSelectedImage(event.target.files[0]);
@@ -188,21 +192,13 @@ export const AnalyticsVisitsByCountry = (props) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>
-              State or Region
-            </TableCell>
+            <TableCell>State or Region</TableCell>
             <TableCell sortDirection={order}>
-              <TableSortLabel
-                active
-                direction={order}
-                onClick={handleSort}
-              >
+              <TableSortLabel active direction={order} onClick={handleSort}>
                 Value
               </TableSortLabel>
             </TableCell>
-            <TableCell>
-              SEO
-            </TableCell>
+            <TableCell>SEO</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -210,61 +206,44 @@ export const AnalyticsVisitsByCountry = (props) => {
             <TableRow
               key={country.name}
               sx={{
-                '&:last-child td': {
-                  border: 0
-                }
+                "&:last-child td": {
+                  border: 0,
+                },
               }}
             >
               <TableCell>
                 <Box
                   sx={{
-                    alignItems: 'center',
-                    display: 'flex'
+                    alignItems: "center",
+                    display: "flex",
                   }}
                 >
                   <Box
                     sx={{
                       height: 16,
                       width: 16,
-                      '& img': {
+                      "& img": {
                         height: 16,
-                        width: 16
-                      }
+                        width: 16,
+                      },
                     }}
                   >
-                    <img
-                      alt={country.name}
-                      src={country.flag}
-                    />
+                    <img alt={country.name} src={country.flag} />
                   </Box>
-                  <Typography
-                    sx={{ ml: 1 }}
-                    variant="subtitle2"
-                  >
+                  <Typography sx={{ ml: 1 }} variant="subtitle2">
                     {country.name}
                   </Typography>
                 </Box>
               </TableCell>
-              <TableCell>
-                {numeral(country.visits).format('0,0')}
-              </TableCell>
-              <TableCell>
-                {country.seo}
-                %
-              </TableCell>
+              <TableCell>{numeral(country.visits).format("0,0")}</TableCell>
+              <TableCell>{country.seo}%</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <Divider />
       <CardActions>
-        <Button
-          endIcon={(
-            <ArrowRightIcon fontSize="small" />
-          )}
-        >
-          See more
-        </Button>
+        <Button endIcon={<ArrowRightIcon fontSize="small" />}>See more</Button>
       </CardActions>
     </Card>
   );

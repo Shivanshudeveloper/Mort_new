@@ -127,6 +127,7 @@ const Overview = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const initialdata = {
     name: "",
     coe: "",
@@ -163,6 +164,7 @@ const Overview = () => {
   };
   const formSubmit = async (e) => {
     e.preventDefault();
+    console.log(e.target.name.value);
     dispatch(Postdata(datashow));
     setdata(initialdata);
     setTimeout(async () => {

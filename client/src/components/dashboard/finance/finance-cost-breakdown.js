@@ -1,4 +1,4 @@
-import numeral from 'numeral';
+import numeral from "numeral";
 import {
   Box,
   Card,
@@ -10,34 +10,34 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Typography
-} from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { Chart } from '../../chart';
+  Typography,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { Chart } from "../../chart";
 
 const data = {
   series: [
     {
-      color: '#FFB547',
-      data: 14859,
-      label: 'Strategy'
+      color: "#FFB547",
+      data: 0,
+      label: "Strategy",
     },
     {
-      color: '#7BC67E',
-      data: 35690,
-      label: 'Outsourcing'
+      color: "#7BC67E",
+      data: 0,
+      label: "Outsourcing",
     },
     {
-      color: '#7783DB',
-      data: 45120,
-      label: 'Marketing'
+      color: "#7783DB",
+      data: 0,
+      label: "Marketing",
     },
     {
-      color: '#9DA4DD',
-      data: 25486,
-      label: 'Other'
-    }
-  ]
+      color: "#9DA4DD",
+      data: 0,
+      label: "Other",
+    },
+  ],
 };
 
 export const FinanceCostBreakdown = (props) => {
@@ -45,29 +45,29 @@ export const FinanceCostBreakdown = (props) => {
 
   const chartOptions = {
     chart: {
-      background: 'transparent',
+      background: "transparent",
       stacked: false,
       toolbar: {
-        show: false
-      }
+        show: false,
+      },
     },
     colors: data.series.map((item) => item.color),
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     fill: {
-      opacity: 1
+      opacity: 1,
     },
     labels: data.series.map((item) => item.label),
     legend: {
-      show: false
+      show: false,
     },
     stroke: {
-      width: 0
+      width: 0,
     },
     theme: {
-      mode: theme.palette.mode
-    }
+      mode: theme.palette.mode,
+    },
   };
 
   const chartSeries = data.series.map((item) => item.data);
@@ -87,12 +87,8 @@ export const FinanceCostBreakdown = (props) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>
-              Top Channels
-            </TableCell>
-            <TableCell align="right">
-              Value
-            </TableCell>
+            <TableCell>Top Channels</TableCell>
+            <TableCell align="right">Value</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -102,31 +98,26 @@ export const FinanceCostBreakdown = (props) => {
                 <Box
                   key={item.label}
                   sx={{
-                    alignItems: 'center',
-                    display: 'flex'
+                    alignItems: "center",
+                    display: "flex",
                   }}
                 >
                   <Box
                     sx={{
                       border: 3,
                       borderColor: item.color,
-                      borderRadius: '50%',
+                      borderRadius: "50%",
                       height: 16,
                       mr: 1,
-                      width: 16
+                      width: 16,
                     }}
                   />
-                  <Typography variant="subtitle2">
-                    {item.label}
-                  </Typography>
+                  <Typography variant="subtitle2">{item.label}</Typography>
                 </Box>
               </TableCell>
               <TableCell align="right">
-                <Typography
-                  color="textSecondary"
-                  variant="body2"
-                >
-                  {numeral(item.data).format('$0,0.00')}
+                <Typography color="textSecondary" variant="body2">
+                  {numeral(item.data).format("$0,0.00")}
                 </Typography>
               </TableCell>
             </TableRow>
