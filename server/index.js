@@ -9,9 +9,9 @@ const getpostroute = require("./routes/getpostroute.js");
 const editpostroute = require("./routes/editpostroute.js");
 const deletepostroute = require("./routes/deletepostroute.js");
 const xmldataPostroute = require("./routes/xmlpostroute.js");
-require("dotenv").config();
+// require("dotenv").config();
 mongoose
-  .connect(database)
+  .connect(database, { useNewUrlParser: true })
   .then(() => {
     console.log("Database Connected Successfully");
   })
@@ -35,9 +35,9 @@ app.use("/edit", editpostroute);
 app.use("/delete", deletepostroute);
 app.use("/xmldata", xmldataPostroute);
 
-const port = process.env.PORT;
+// const port = process.env.PORT;
 try {
-  app.listen(port || 3300, (req, res) => {
+  app.listen(3300, (req, res) => {
     console.log("Server is Running");
   });
 } catch (error) {
