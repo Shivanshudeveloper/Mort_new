@@ -354,12 +354,8 @@ export const DashboardSidebar = (props) => {
             <Box sx={{ p: 3 }}>
               <NextLink href="/" passHref>
                 <a>
-                  <img
-                    src="https://res.cloudinary.com/daboha8rt/image/upload/v1669445719/mortagesaas/Engageall_r9ivxa_1_p66q9d.png"
-                    style={{
-                      height: 100,
-                      width: 150,
-                    }}
+                  <Logo
+                    
                   />
                 </a>
               </NextLink>
