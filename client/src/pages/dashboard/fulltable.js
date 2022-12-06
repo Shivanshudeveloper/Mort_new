@@ -5,6 +5,9 @@ import { useState } from "react";
 function Fulltable() {
   const [rowopen, setrowopen] = useState(false);
 
+  useEffect(() => {
+    console.log(window.localStorage.getItem("Full_Table"));
+  }, []);
   const columnsTable = [
     { id: "CreatedDatetime", label: "Created Datetime", minWidth: 170 },
     {

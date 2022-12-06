@@ -368,6 +368,7 @@ const TableXml = () => {
     setxml(xmlDoc2);
     console.log(xml, "bhai main");
     setrowopen(true);
+    window.localStorage.setItem("Full_Table", true);
     const data = Datasender(xmlDoc2);
     dispatch(xmlDataAction(data));
     console.log(data);
@@ -400,7 +401,7 @@ const TableXml = () => {
     setrowopen(JSON.parse(data));
   }, []);
   useEffect(() => {
-    window.localStorage.setItem("Full_Table", JSON.stringify(rowopen));
+    // window.localStorage.setItem("Full_Table", JSON.stringify(rowopen));
   }, [rowopen]);
 
   return (
