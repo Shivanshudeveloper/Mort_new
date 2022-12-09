@@ -586,22 +586,17 @@ const TableXml = () => {
         </AppBar>
 
         <table>
-          <tr
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(18, 1fr)",
-            }}
-          >
+          <tr>
             {columnsTable.map((column) => {
               return (
                 <th
                   style={{
                     minWidth: "150px",
                     gap: "10px",
-                    border: "1px solid rgba(255,255,255,0.3)",
+                    border: "1px solid rgba(255,255,255,0.7)",
                     minHeight: "20px",
                     borderRight: "none",
-                    fontSize: "15px",
+                    fontSize: "12px",
                   }}
                 >
                   {column.label}
@@ -610,12 +605,7 @@ const TableXml = () => {
             })}
           </tr>
           {rowopen ? (
-            <tr
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(18, 1fr)",
-              }}
-            >
+            <tr>
               {columnsTable.map((columns) => {
                 if (
                   columns.label == "SUBJECT_PROPERTY AddressLine Text" &&
@@ -631,9 +621,10 @@ const TableXml = () => {
                         style={{
                           textAlign: "center",
                           minWidth: "150px",
-                          border: "1px solid rgba(255,255,255,0.3)",
+                          border: "1px solid rgba(255,255,255,0.7)",
                           minHeight: "20px",
                           borderRight: "none",
+                          fontSize: "10px",
                           borderTop: "none",
                         }}
                       >
@@ -653,6 +644,7 @@ const TableXml = () => {
                         minWidth: "150px",
                         border: "1px solid rgba(255,255,255,0.3)",
                         minHeight: "20px",
+                        fontSize: "10px",
                         borderRight: "none",
                         borderTop: "none",
                       }}
