@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "../../pages/dashboard/Table.module.scss";
 import { useState } from "react";
 
-
 // import { columnsTable } from "./xmltablecolumsfield";
 import { useDispatch } from "react-redux";
 import { XmldataPostRoute } from "../../api/xmldataPost";
@@ -435,8 +434,7 @@ const TableXml = () => {
 
   return (
     <div>
-      
-<div>
+      <div>
         <input
           style={{
             backgroundColor: "#5048E5",
@@ -548,18 +546,19 @@ const TableXml = () => {
             ""
           )}
         </table>
-     
-     
       </div>
 
-
-      <Button style={{
-display:"flex",
-flexDirection: "flex-end"
-}}
-variant="outlined" onClick={handleClickOpen}>
-  See More
-</Button>
+      <Button
+        style={{
+          display: "flex",
+          position: "relative",
+          left: "57rem",
+        }}
+        variant="outlined"
+        onClick={handleClickOpen}
+      >
+        See More
+      </Button>
 
       <Dialog
         fullScreen
@@ -580,13 +579,13 @@ variant="outlined" onClick={handleClickOpen}>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               Table
             </Typography>
-            <Button style={{}} autoFocus color="inherit" onClick={handleClose}>
+            <Button autoFocus color="inherit" onClick={handleClose}>
               save
             </Button>
           </Toolbar>
         </AppBar>
 
-        <table >
+        <table>
           <tr
             style={{
               display: "grid",
@@ -598,7 +597,7 @@ variant="outlined" onClick={handleClickOpen}>
                 <th
                   style={{
                     minWidth: "150px",
-                    gap:"10px",
+                    gap: "10px",
                     border: "1px solid rgba(255,255,255,0.3)",
                     minHeight: "20px",
                     borderRight: "none",
@@ -611,10 +610,12 @@ variant="outlined" onClick={handleClickOpen}>
             })}
           </tr>
           {rowopen ? (
-            <tr style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(18, 1fr)",
-            }}>
+            <tr
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(18, 1fr)",
+              }}
+            >
               {columnsTable.map((columns) => {
                 if (
                   columns.label == "SUBJECT_PROPERTY AddressLine Text" &&
@@ -634,7 +635,6 @@ variant="outlined" onClick={handleClickOpen}>
                           minHeight: "20px",
                           borderRight: "none",
                           borderTop: "none",
-                         
                         }}
                       >
                         {`${value}`}
@@ -685,9 +685,7 @@ variant="outlined" onClick={handleClickOpen}>
             ""
           )}
         </table>
-       
       </Dialog>
-      
     </div>
   );
 };
