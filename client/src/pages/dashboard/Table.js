@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-
+import "../../pages/dashboard/Table.module.scss";
 import { useState } from "react";
+
 
 // import { columnsTable } from "./xmltablecolumsfield";
 import { useDispatch } from "react-redux";
@@ -434,125 +435,8 @@ const TableXml = () => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        See More
-      </Button>
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: "relative" }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Table
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
-          </Toolbar>
-        </AppBar>
-
-        <table>
-          <tr>
-            {columnsTable.map((column) => {
-              return (
-                <th
-                  style={{
-                    minWidth: "150px",
-                    border: "1px solid rgba(255,255,255,0.3)",
-                    minHeight: "20px",
-                    borderRight: "none",
-                  }}
-                >
-                  {column.label}
-                </th>
-              );
-            })}
-          </tr>
-          {rowopen ? (
-            <tr>
-              {columnsTable.map((columns) => {
-                if (
-                  columns.label == "SUBJECT_PROPERTY AddressLine Text" &&
-                  ivar == 0
-                ) {
-                  var value =
-                    xml.getElementsByTagName(`AddressLineText`)[0].childNodes[0]
-                      .nodeValue;
-                  seti(1);
-                  return (
-                    <div>
-                      <td
-                        style={{
-                          textAlign: "center",
-                          minWidth: "150px",
-                          border: "1px solid rgba(255,255,255,0.3)",
-                          minHeight: "20px",
-                          borderRight: "none",
-                          borderTop: "none",
-                        }}
-                      >
-                        {`${value}`}
-                      </td>
-                    </div>
-                  );
-                } else if (columns.label == "RESIDENCE Address Line Text") {
-                  var value =
-                    xml.getElementsByTagName(`AddressLineText`)[1].childNodes[0]
-                      .nodeValue;
-
-                  return (
-                    <td
-                      style={{
-                        textAlign: "center",
-                        minWidth: "150px",
-                        border: "1px solid rgba(255,255,255,0.3)",
-                        minHeight: "20px",
-                        borderRight: "none",
-                        borderTop: "none",
-                      }}
-                    >
-                      {`${value}`}
-                    </td>
-                  );
-                } else {
-                  return (
-                    <td
-                      style={{
-                        textAlign: "center",
-                        minWidth: "150px",
-                        border: "1px solid rgba(255,255,255,0.3)",
-                        minHeight: "20px",
-                        borderRight: "none",
-                        borderTop: "none",
-                      }}
-                    >
-                      {xml.getElementsByTagName(`${columns.id}`)[0]
-                        ? xml.getElementsByTagName(`${columns.id}`)[0]
-                            .childNodes[0].nodeValue
-                        : `No data in this field ${columns.id}}`}
-                    </td>
-                  );
-                }
-              })}
-            </tr>
-          ) : (
-            ""
-          )}
-        </table>
-      </Dialog>
-
-      <div>
+      
+<div>
         <input
           style={{
             backgroundColor: "#5048E5",
@@ -566,6 +450,7 @@ const TableXml = () => {
           onChange={(e) => handleFileChosen(e.target.files[0])}
         />
       </div>
+
       <div
         className="tablecontainer"
         style={{ width: "100vw", overflow: "auto" }}
@@ -663,8 +548,146 @@ const TableXml = () => {
             ""
           )}
         </table>
+     
+     
       </div>
-      <table></table>
+
+
+      <Button style={{
+display:"flex",
+flexDirection: "flex-end"
+}}
+variant="outlined" onClick={handleClickOpen}>
+  See More
+</Button>
+
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: "relative" }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Table
+            </Typography>
+            <Button style={{}} autoFocus color="inherit" onClick={handleClose}>
+              save
+            </Button>
+          </Toolbar>
+        </AppBar>
+
+        <table >
+          <tr
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(18, 1fr)",
+            }}
+          >
+            {columnsTable.map((column) => {
+              return (
+                <th
+                  style={{
+                    minWidth: "150px",
+                    gap:"10px",
+                    border: "1px solid rgba(255,255,255,0.3)",
+                    minHeight: "20px",
+                    borderRight: "none",
+                    fontSize: "15px",
+                  }}
+                >
+                  {column.label}
+                </th>
+              );
+            })}
+          </tr>
+          {rowopen ? (
+            <tr style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(18, 1fr)",
+            }}>
+              {columnsTable.map((columns) => {
+                if (
+                  columns.label == "SUBJECT_PROPERTY AddressLine Text" &&
+                  ivar == 0
+                ) {
+                  var value =
+                    xml.getElementsByTagName(`AddressLineText`)[0].childNodes[0]
+                      .nodeValue;
+                  seti(1);
+                  return (
+                    <div>
+                      <td
+                        style={{
+                          textAlign: "center",
+                          minWidth: "150px",
+                          border: "1px solid rgba(255,255,255,0.3)",
+                          minHeight: "20px",
+                          borderRight: "none",
+                          borderTop: "none",
+                         
+                        }}
+                      >
+                        {`${value}`}
+                      </td>
+                    </div>
+                  );
+                } else if (columns.label == "RESIDENCE Address Line Text") {
+                  var value =
+                    xml.getElementsByTagName(`AddressLineText`)[1].childNodes[0]
+                      .nodeValue;
+
+                  return (
+                    <td
+                      style={{
+                        textAlign: "center",
+                        minWidth: "150px",
+                        border: "1px solid rgba(255,255,255,0.3)",
+                        minHeight: "20px",
+                        borderRight: "none",
+                        borderTop: "none",
+                      }}
+                    >
+                      {`${value}`}
+                    </td>
+                  );
+                } else {
+                  return (
+                    <td
+                      style={{
+                        textAlign: "center",
+                        minWidth: "150px",
+                        border: "1px solid rgba(255,255,255,0.3)",
+                        minHeight: "20px",
+                        borderRight: "none",
+                        borderTop: "none",
+                      }}
+                    >
+                      {xml.getElementsByTagName(`${columns.id}`)[0]
+                        ? xml.getElementsByTagName(`${columns.id}`)[0]
+                            .childNodes[0].nodeValue
+                        : `No data in this field ${columns.id}}`}
+                    </td>
+                  );
+                }
+              })}
+            </tr>
+          ) : (
+            ""
+          )}
+        </table>
+       
+      </Dialog>
+      
     </div>
   );
 };
