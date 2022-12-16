@@ -4,7 +4,15 @@ import NextLink from "next/link";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
-import { Box, Card, Container, Divider, Link, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  Container,
+  Divider,
+  Link,
+  Checkbox,
+  Typography,
+} from "@mui/material";
 import { GuestGuard } from "../../components/authentication/guest-guard";
 import { AuthBanner } from "../../components/authentication/auth-banner";
 import { AmplifyLogin } from "../../components/authentication/amplify-login";
@@ -45,6 +53,7 @@ const Login = () => {
           position: "absolute",
           flexDirection: "column",
           minHeight: "100vh",
+          width: "full",
           left: "120px",
         }}
       >
@@ -57,7 +66,7 @@ const Login = () => {
             },
           }}
         >
-          <Grid container spacing={2} margin={-6}>
+          <Grid container spacing={2} marginTop={-10}>
             <Grid item xs={12} md={8} lg={9}>
               <Paper
                 sx={{
@@ -65,6 +74,7 @@ const Login = () => {
                   display: "flex",
                   flexDirection: "column",
                   height: "auto",
+                  width: "auto",
                 }}
               >
                 <Card elevation={16} sx={{ p: 4 }}>
@@ -74,6 +84,7 @@ const Login = () => {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
+                      width: "auto",
                     }}
                   >
                     <NextLink href="/" passHref>
@@ -102,10 +113,21 @@ const Login = () => {
                     }}
                   >
                     {platform === "Amplify" && <AmplifyLogin />}
+
                     {platform === "Auth0" && <Auth0Login />}
+
                     {platform === "Firebase" && <FirebaseLogin />}
+
                     {platform === "JWT" && <JWTLogin />}
+                    <Checkbox name="policy" />
+                    <Typography color="textSecondary" variant="body2">
+                      I have read the
+                      <Link href="/authentication/terms">
+                        Terms and Conditions
+                      </Link>
+                    </Typography>
                   </Box>
+
                   <Divider sx={{ my: 3 }} />
                   <NextLink
                     href={
@@ -155,7 +177,7 @@ const Login = () => {
                   color: "white",
                 }}
               >
-                <div className="hidden lg:block relative w-full lg:w-1/2 bg-blue-1000">
+                <div className="hidden lg:block relative w-full lg:w-1/2 bg-blue-900">
                   <div
                     className="absolute bottom-0 inset-x-0 mx-auto mb-12 max-w-xl text-center"
                     //   style="z-index: 10;"
