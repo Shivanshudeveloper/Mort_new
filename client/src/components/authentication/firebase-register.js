@@ -80,7 +80,7 @@ export const FirebaseRegister = (props) => {
             }).then(() => {
               // console.log(user2.displayName);
               if (localStorage.getItem("role") == "employee") {
-                const returnUrl = '/dashboard/checkin';
+                const returnUrl = '/dashboard';
                 router.push(returnUrl);
               } else {
                 const returnUrl = '/dashboard';

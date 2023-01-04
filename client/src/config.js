@@ -12,14 +12,27 @@ export const auth0Config = {
 };
 
 export const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+  apiKey: "AIzaSyDGpc3IFaTYM-3CQnF6YHdapasZBcpZrEo",
+  authDomain: "evencloud-26d32.firebaseapp.com",
+  databaseURL: "https://evencloud-26d32.firebaseio.com",
+  projectId: "evencloud-26d32",
+  storageBucket: "evencloud-26d32.appspot.com",
+  messagingSenderId: "599725599274",
+  appId: "1:599725599274:web:158b5499c9e78ac5a1f153",
+  measurementId: "G-KER4PG8T29"
 };
+
+
+
+// const firebaseConfig = {
+//   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+//   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+//   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+//   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+//   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+//   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+//   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
+// };
 
 export const gtmConfig = {
   containerId: process.env.NEXT_PUBLIC_GTM_CONTAINER_ID

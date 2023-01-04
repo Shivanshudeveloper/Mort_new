@@ -8,5 +8,5 @@ if (!firebase.apps.length) {
 }
 const storage = firebase.storage();
   
-  export default firebase;
+export default firebase;
 export { storage } ;

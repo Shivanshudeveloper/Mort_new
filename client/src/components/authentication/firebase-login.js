@@ -14,6 +14,7 @@ import { useAuth } from "../../hooks/use-auth";
 import { useMounted } from "../../hooks/use-mounted";
 import firebase from "../../lib/firebase";
 import { useState } from "react";
+import { API_SERVICE } from "../../config";
 
 export const FirebaseLogin = (props) => {
   const isMounted = useMounted();
@@ -36,33 +37,20 @@ export const FirebaseLogin = (props) => {
     }),
     onSubmit: async (values, helpers) => {
       try {
-        firebase.auth();
-        signInWithEmailAndPassword(values.email, values.password).then(
-          async () => {
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(values.email, values.password)
+          .then(async () => {
             const user2 = firebase.auth().currentUser;
             localStorage.setItem("userEmail", user2.email);
             localStorage.setItem("name", user2.displayName);
-            const res = await getUser(localStorage.getItem("userEmail"));
-            console.log(res);
-            if (res.data) {
-              console.log(resizeBy.data);
-              setRole();
-              localStorage.setItem("role", res.data.role);
-              if (isMounted()) {
-                // if (localStorage.getItem("role") == "employee") {
-                const returnUrl = "/dashboard";
-                router.push(returnUrl);
-                // }
-                // else  {
-                //   const returnUrl = '/dashboard';
-                //   router.push(returnUrl);
-                // }
-              }
-            } else if (!res.data) {
-              addUser();
+            console.log(user2);
+
+            if (isMounted()) {
+              const returnUrl = "/dashboard";
+              router.push(returnUrl);
             }
-          }
-        );
+          });
       } catch (err) {
         console.error(err);
 
@@ -74,14 +62,38 @@ export const FirebaseLogin = (props) => {
       }
     },
   });
-  const addUser = async () => {
 
+  const getUser = async (userEmail) => {
+    try {
+      const response = await fetch(`${API_SERVICE}/getuserdata/${userEmail}`);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addUser = async () => {
     var dataSend = {
       email: localStorage.getItem("userEmail"),
-      role: localStorage.getItem("role")
+      role: "employee",
+    };
+
+    const res = await fetch(`${API_SERVICE}/postUser`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataSend),
+    });
+
+    if (res.status === 200) {
+      console.log("User Added");
+      localStorage.setItem("role", "employee");
     }
-  }
-  
+  };
+
   const handleGoogleClick = async () => {
     try {
       await signInWithGoogle();
@@ -92,45 +104,6 @@ export const FirebaseLogin = (props) => {
 
   return (
     <div {...props}>
-      <Button
-        fullWidth
-        onClick={handleGoogleClick}
-        size="large"
-        sx={{
-          backgroundColor: "common.white",
-          color: "common.black",
-          "&:hover": {
-            backgroundColor: "common.white",
-            color: "common.black",
-          },
-        }}
-        variant="contained"
-      >
-        <Box
-          alt="Google"
-          component="img"
-          src="/static/icons/google.svg"
-          sx={{ mr: 1 }}
-        />
-        Google
-      </Button>
-      <Box
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          mt: 2,
-        }}
-      >
-        <Box sx={{ flexGrow: 1 }}>
-          <Divider orientation="horizontal" />
-        </Box>
-        <Typography color="textSecondary" sx={{ m: 2 }} variant="body1">
-          OR
-        </Typography>
-        <Box sx={{ flexGrow: 1 }}>
-          <Divider orientation="horizontal" />
-        </Box>
-      </Box>
       <form noValidate onSubmit={formik.handleSubmit}>
         <TextField
           error={Boolean(formik.touched.email && formik.errors.email)}
@@ -172,13 +145,6 @@ export const FirebaseLogin = (props) => {
             Log In
           </Button>
         </Box>
-        {/* <Box sx={{ mt: 2 }}>
-          <Alert severity="info">
-            <div>
-              You can use <b>demo@devias.io</b> and password <b>Password123!</b>
-            </div>
-          </Alert>
-        </Box> */}
       </form>
     </div>
   );

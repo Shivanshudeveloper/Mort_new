@@ -10,7 +10,7 @@ import { HomeFeatures } from '../components/home/home-features';
 import { HomeTestimonials } from '../components/home/home-testimonials';
 import { gtm } from '../lib/gtm';
 import { useRouter } from 'next/router';
-
+import {useAuth} from "../hooks/use-auth"
 const Home = () => {
   const {user}=useAuth();
   useEffect(() => {
@@ -18,10 +18,7 @@ const Home = () => {
     if (!user) {
       console.log(user)
       window.location.href = "/authentication/login";
-    }else {
-      
-      window.location.href = "/dashboard/register";
-      }
+    }
     
    
   }, [user]);
