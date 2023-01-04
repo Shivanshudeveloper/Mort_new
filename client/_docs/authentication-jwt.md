@@ -26,11 +26,11 @@ Open `src/pages/_app.js` file, import the provider and wrap the App component wi
 
 ```js
 // src/pages/_app.js
-import { AuthConsumer, AuthProvider } from '../contexts/jwt-context';
+import { AuthConsumer, AuthProvider } from "../contexts/jwt-context";
 
 const App = (props) => {
   const { Component, pageProps } = props;
-    
+
   return (
     <AuthProvider>
       <Component {...pageProps} />
@@ -44,7 +44,7 @@ const App = (props) => {
 Open `src/hooks/use-auth.js` file and replace the current context the following line:
 
 ```js
-import { AuthContext } from '../contexts/jwt-context';
+import { AuthContext } from "../contexts/jwt-context";
 ```
 
 ## How to use auth
@@ -57,16 +57,12 @@ needed.
 
 ```jsx
 // src/pages/index.js
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from "../hooks/use-auth";
 
 const Home = () => {
   const { user } = useAuth();
 
-  return (
-    <div>
-      Email: {user.email}
-    </div>
-  );
+  return <div>Email: {user?.email}</div>;
 };
 ```
 
@@ -76,21 +72,19 @@ const Home = () => {
 
 ```jsx
 // src/pages/index.js
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from "../hooks/use-auth";
 
 const Home = () => {
   const { login } = useAuth();
-  
+
   const handleLogin = () => {
     // Email/username and password
-    login('demo@devias.io', 'Password123!');
+    login("demo@devias.io", "Password123!");
   };
 
   return (
     <div>
-      <button onClick={handleLogin}>
-        Login
-      </button>
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 };

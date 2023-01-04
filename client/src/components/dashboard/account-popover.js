@@ -66,7 +66,7 @@ export const AccountPopover = (props) => {
         }}
       >
         <Avatar
-          src={user.avatar}
+          src={user?.avatar}
           sx={{
             height: 40,
             width: 40,
@@ -79,7 +79,7 @@ export const AccountPopover = (props) => {
             ml: 1,
           }}
         >
-          <Typography variant="body1">{user.name}</Typography>
+          <Typography variant="body1">{user?.name}</Typography>
         </Box>
       </Box>
       <Divider />

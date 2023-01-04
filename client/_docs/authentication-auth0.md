@@ -30,8 +30,8 @@ from `src/config.js` file.
 
 ```js
 export const auth0Config = {
-  client_id: '',
-  domain: ''
+  client_id: "",
+  domain: "",
 };
 ```
 
@@ -56,13 +56,13 @@ authentication server). To make use of Amplify simply follow these steps:
 Open `src/pages/_app.js` file and replace the following line:
 
 ```js
-import { AuthConsumer, AuthProvider } from '../contexts/jwt-context';
+import { AuthConsumer, AuthProvider } from "../contexts/jwt-context";
 ```
 
 with
 
 ```js
-import { AuthConsumer, AuthProvider } from '../contexts/auth0-context';
+import { AuthConsumer, AuthProvider } from "../contexts/auth0-context";
 ```
 
 ### Step 2. Replace the hook context
@@ -70,13 +70,13 @@ import { AuthConsumer, AuthProvider } from '../contexts/auth0-context';
 Open `src/hooks/use-auth.js` file and replace the following line:
 
 ```js
-import { AuthContext } from '../contexts/jwt-context';
+import { AuthContext } from "../contexts/jwt-context";
 ```
 
 with
 
 ```js
-import { AuthContext } from '../contexts/auth0-context';
+import { AuthContext } from "../contexts/auth0-context";
 ```
 
 ## How to use auth
@@ -89,16 +89,12 @@ needed.
 
 ```jsx
 // src/pages/index.js
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from "../hooks/use-auth";
 
 const Home = () => {
   const { user } = useAuth();
 
-  return (
-    <div>
-      Email: {user.email}
-    </div>
-  );
+  return <div>Email: {user?.email}</div>;
 };
 ```
 
@@ -108,20 +104,18 @@ const Home = () => {
 
 ```jsx
 // src/pages/index.js
-import { useAuth } from '../hooks/use-auth';
+import { useAuth } from "../hooks/use-auth";
 
 const Home = () => {
   const { loginWithPopup } = useAuth();
-  
+
   const handleLogin = () => {
     loginWithPopup();
   };
 
   return (
     <div>
-      <button onClick={handleLogin}>
-        Login
-      </button>
+      <button onClick={handleLogin}>Login</button>
     </div>
   );
 };

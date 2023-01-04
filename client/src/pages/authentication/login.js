@@ -116,7 +116,7 @@ const Login = () => {
 
                     {/* {platform === "Auth0" && <Auth0Login />} */}
 
-                    {platform === "Firebase" && <FirebaseLogin />}
+                    <FirebaseLogin />
 
                     {/* {platform === "JWT" && <JWTLogin />} */}
                     <Checkbox name="policy" />

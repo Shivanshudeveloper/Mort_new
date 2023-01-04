@@ -46,7 +46,7 @@ export const FirebaseLogin = (props) => {
             localStorage.setItem("name", user2.displayName);
             console.log(user2);
 
-            if (isMounted()) {
+            if (true) {
               const returnUrl = "/dashboard";
               router.push(returnUrl);
             }
@@ -54,7 +54,7 @@ export const FirebaseLogin = (props) => {
       } catch (err) {
         console.error(err);
 
-        if (isMounted()) {
+        if (true) {
           helpers.setStatus({ success: false });
           helpers.setErrors({ submit: err.message });
           helpers.setSubmitting(false);

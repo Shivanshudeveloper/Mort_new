@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { UserCircle as UserCircleIcon } from "../../../icons/user-circle";
 import router from "next/router";
-import firebase from '../../../lib/firebase'
-import {useState} from "react";
+import firebase from "../../../lib/firebase";
+import { useState } from "react";
 
 export const AccountGeneralSettings = (props) => {
   // To get the user from the authContext, you can use
@@ -22,22 +22,24 @@ export const AccountGeneralSettings = (props) => {
     // avatar: "/static/mock-images/avatars/avatar-anika_visser.png",
     // name: "Anika Visser",
     name: localStorage.getItem("name"),
-    email: localStorage.getItem("userEmail")
+    email: localStorage.getItem("userEmail"),
   };
 
-  const [name , setName] = useState('');
-  const updateName=()=>{
-    const currUser=firebase.auth().currentUser;
-          console.log(name);
-          currUser.updateProfile({
-            displayName:name
-          }).then(()=>{
-            sessionStorage.setItem("name",name),
-            router.push('/dashboard/account');
-          }).catch((error)=>{
-            console.log(error);
-          })
-   }
+  const [name, setName] = useState("");
+  const updateName = () => {
+    const currUser = firebase.auth().currentUser;
+    console.log(name);
+    curruser
+      ?.updateProfile({
+        displayName: name,
+      })
+      .then(() => {
+        sessionStorage.setItem("name", name), router.push("/dashboard/account");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <Box sx={{ mt: 4 }} {...props}>
@@ -55,7 +57,7 @@ export const AccountGeneralSettings = (props) => {
                 }}
               >
                 <Avatar
-                  src={user.avatar}
+                  src={user?.avatar}
                   sx={{
                     height: 64,
                     mr: 2,
@@ -77,16 +79,16 @@ export const AccountGeneralSettings = (props) => {
                 }}
               >
                 <TextField
-                  defaultValue={user.name}
+                  defaultValue={user?.name}
                   label="Full Name"
                   size="small"
                   sx={{
                     flexGrow: 1,
                     mr: 3,
                   }}
-                  onChange={e=>setName(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                 />
-                <Button onClick={updateName} >Save</Button>
+                <Button onClick={updateName}>Save</Button>
               </Box>
               <Box
                 sx={{
@@ -96,7 +98,7 @@ export const AccountGeneralSettings = (props) => {
                 }}
               >
                 <TextField
-                   defaultValue={user.email}
+                  defaultValue={user?.email}
                   disabled
                   label="Email Address"
                   required

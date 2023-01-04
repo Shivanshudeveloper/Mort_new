@@ -16,8 +16,10 @@ const Home = () => {
   useEffect(() => {
     gtm.push({ event: 'page_view' });
     if (!user) {
-      console.log(user)
-      window.location.href = "/authentication/login";
+      // console.log(user)
+      // window.location.href = "/authentication/login";
+    }else{
+      // window.location.href = "/dashboard";
     }
     
    
