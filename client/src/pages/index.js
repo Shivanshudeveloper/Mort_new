@@ -12,12 +12,21 @@ import { gtm } from '../lib/gtm';
 import { useRouter } from 'next/router';
 
 const Home = () => {
+  const {user}=useAuth();
   useEffect(() => {
     gtm.push({ event: 'page_view' });
-    router.push('/authentication/login')
-  }, []);
+    if (!user) {
+      console.log(user)
+      window.location.href = "/authentication/login";
+    }else {
+      
+      window.location.href = "/dashboard/register";
+      }
+    
+   
+  }, [user]);
 
-  const router = useRouter();
+  
 
   return (
     <>

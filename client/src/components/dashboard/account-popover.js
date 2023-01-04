@@ -25,8 +25,9 @@ export const AccountPopover = (props) => {
   // To get the user from the authContext, you can use
   // `const { user } = useAuth();`
   const user = {
-    avatar: "/static/mock-images/avatars/avatar-anika_visser.png",
-    name: "Anika Visser",
+    // avatar: "/static/mock-images/avatars/avatar-anika_visser.png",
+    // name: "Anika Visser",
+    name: localStorage.getItem("name"),
   };
 
   const handleLogout = async () => {
@@ -34,6 +35,9 @@ export const AccountPopover = (props) => {
       onClose?.();
       await logout();
       router.push("/authentication/login");
+      localStorage.setItem("userEmail", "");
+      localStorage.setItem("name", "");
+      console.log("logged out");
     } catch (err) {
       console.error(err);
       toast.error("Unable to logout.");
@@ -76,9 +80,6 @@ export const AccountPopover = (props) => {
           }}
         >
           <Typography variant="body1">{user.name}</Typography>
-          <Typography color="textSecondary" variant="body2">
-            Acme Inc
-          </Typography>
         </Box>
       </Box>
       <Divider />

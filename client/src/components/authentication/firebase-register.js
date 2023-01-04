@@ -13,6 +13,8 @@ import {
 } from '@mui/material';
 import { useAuth } from '../../hooks/use-auth';
 import { useMounted } from '../../hooks/use-mounted';
+import firebase from '../../lib/firebase'
+
 
 export const FirebaseRegister = (props) => {
   const isMounted = useMounted();
@@ -41,24 +43,72 @@ export const FirebaseRegister = (props) => {
         .oneOf([true], 'This field must be checked')
     }),
     onSubmit: async (values, helpers) => {
-      try {
-        await createUserWithEmailAndPassword(values.email, values.password);
+       try {
+      //   await createUserWithEmailAndPassword(values.email, values.password);
 
-        if (isMounted()) {
-          const returnUrl = router.query.returnUrl || '/dashboard';
-          router.push(returnUrl);
-        }
-      } catch (err) {
-        console.error(err);
+      //   if (isMounted()) {
+      //     const returnUrl = router.query.returnUrl || '/dashboard';
+      //     router.push(returnUrl);
+      //   }
+      // } catch (err) {
+      //   console.error(err);
 
-        if (isMounted()) {
-          helpers.setStatus({ success: false });
-          helpers.setErrors({ submit: err.message });
-          helpers.setSubmitting(false);
+      //   if (isMounted()) {
+      //     helpers.setStatus({ success: false });
+      //     helpers.setErrors({ submit: err.message });
+      //     helpers.setSubmitting(false);
+      //   }
+      // }
+      localStorage.setItem("name", values.name);
+        localStorage.setItem("loginType", "register");
+
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(values.email, values.password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            // sessionStorage.setItem("userId",user.uid);
+            // sessionStorage.setItem("userEmail",user.email);
+            localStorage.setItem("userId", user.uid);
+            localStorage.setItem("userEmail", user.email);
+            localStorage.setItem("role", "employee")
+            const user2 = firebase.auth().currentUser;
+            addUser();
+
+            user2.updateProfile({
+              displayName: values.name
+            }).then(() => {
+              // console.log(user2.displayName);
+              if (localStorage.getItem("role") == "employee") {
+                const returnUrl = '/dashboard/checkin';
+                router.push(returnUrl);
+              } else {
+                const returnUrl = '/dashboard';
+                router.push(returnUrl);
+              }
+            }).catch((error) => {
+              console.log(error);
+            })
+          })
+        } catch (err) {
+          console.error(err);
+          if (isMounted()) {
+            helpers.setStatus({ success: false });
+            helpers.setErrors({ submit: err.message });
+            helpers.setSubmitting(false);
+          }
         }
-      }
+
     }
   });
+
+  const addUser = async () => {
+
+    var dataSend = {
+      email: localStorage.getItem("userEmail"),
+      role: localStorage.getItem("role")
+    }
+  }
 
   const handleGoogleClick = async () => {
     try {

@@ -11,14 +11,33 @@ import {
   Typography,
 } from "@mui/material";
 import { UserCircle as UserCircleIcon } from "../../../icons/user-circle";
+import router from "next/router";
+import firebase from '../../../lib/firebase'
+import {useState} from "react";
 
 export const AccountGeneralSettings = (props) => {
   // To get the user from the authContext, you can use
   // `const { user } = useAuth();`
   const user = {
-    avatar: "/static/mock-images/avatars/avatar-anika_visser.png",
-    name: "Anika Visser",
+    // avatar: "/static/mock-images/avatars/avatar-anika_visser.png",
+    // name: "Anika Visser",
+    name: localStorage.getItem("name"),
+    email: localStorage.getItem("userEmail")
   };
+
+  const [name , setName] = useState('');
+  const updateName=()=>{
+    const currUser=firebase.auth().currentUser;
+          console.log(name);
+          currUser.updateProfile({
+            displayName:name
+          }).then(()=>{
+            sessionStorage.setItem("name",name),
+            router.push('/dashboard/account');
+          }).catch((error)=>{
+            console.log(error);
+          })
+   }
 
   return (
     <Box sx={{ mt: 4 }} {...props}>
@@ -65,8 +84,9 @@ export const AccountGeneralSettings = (props) => {
                     flexGrow: 1,
                     mr: 3,
                   }}
+                  onChange={e=>setName(e.target.value)}
                 />
-                <Button>Save</Button>
+                <Button onClick={updateName} >Save</Button>
               </Box>
               <Box
                 sx={{
@@ -76,7 +96,7 @@ export const AccountGeneralSettings = (props) => {
                 }}
               >
                 <TextField
-                  defaultValue="dummy.account@gmail.com"
+                   defaultValue={user.email}
                   disabled
                   label="Email Address"
                   required
