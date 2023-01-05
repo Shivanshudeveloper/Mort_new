@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import { useRouter } from 'next/router';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 import {
   Box,
   Button,
@@ -9,11 +9,12 @@ import {
   FormHelperText,
   Link,
   TextField,
-  Typography,
-} from "@mui/material";
-import { useAuth } from "../../hooks/use-auth";
-import { useMounted } from "../../hooks/use-mounted";
-import firebase from "../../lib/firebase";
+  Typography
+} from '@mui/material';
+import { useAuth } from '../../hooks/use-auth';
+import { useMounted } from '../../hooks/use-mounted';
+import firebase from '../../lib/firebase'
+import { API_SERVICE } from '../../config';
 
 export const FirebaseRegister = (props) => {
   const isMounted = useMounted();
@@ -21,36 +22,33 @@ export const FirebaseRegister = (props) => {
   const { createUserWithEmailAndPassword, signInWithGoogle } = useAuth();
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      name: '',
+      email: '',
+      password: '',
       policy: true,
-      submit: null,
+      submit: null
     },
     validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Must be a valid email")
+      name: Yup
+        .string()
         .max(255)
-        .required("Email is required"),
-      password: Yup.string().min(7).max(255).required("Password is required"),
-      policy: Yup.boolean().oneOf([true], "This field must be checked"),
+        .required('Name is required'),
+      email: Yup
+        .string()
+        .email('Must be a valid email')
+        .max(255)
+        .required('Email is required'),
+      password: Yup
+        .string()
+        .min(7)
+        .max(255)
+        .required('Password is required'),
+      policy: Yup
+        .boolean()
+        .oneOf([true], 'This field must be checked')
     }),
     onSubmit: async (values, helpers) => {
       try {
-        //   await createUserWithEmailAndPassword(values.email, values.password);
-
-        //   if (isMounted()) {
-        //     const returnUrl = router.query.returnUrl || '/dashboard';
-        //     router.push(returnUrl);
-        //   }
-        // } catch (err) {
-        //   console.error(err);
-
-        //   if (isMounted()) {
-        //     helpers.setStatus({ success: false });
-        //     helpers.setErrors({ submit: err.message });
-        //     helpers.setSubmitting(false);
-        //   }
-        // }
         localStorage.setItem("name", values.name);
         localStorage.setItem("loginType", "register");
 
@@ -59,32 +57,21 @@ export const FirebaseRegister = (props) => {
           .createUserWithEmailAndPassword(values.email, values.password)
           .then((userCredential) => {
             const user = userCredential.user;
-            // sessionStorage.setItem("userId",user?.uid);
-            // sessionStorage.setItem("userEmail",user?.email);
-            localStorage.setItem("userId", user?.uid);
-            localStorage.setItem("userEmail", user?.email);
-            localStorage.setItem("role", "employee");
+            localStorage.setItem("userId", user.uid);
+            localStorage.setItem("userEmail", user.email);
             const user2 = firebase.auth().currentUser;
-            addUser();
 
-            user2
-              .updateProfile({
-                displayName: values.name,
-              })
-              .then(() => {
-                // console.log(user2.displayName);
-                if (localStorage.getItem("role") == "employee") {
-                  const returnUrl = "/dashboard";
-                  router.push(returnUrl);
-                } else {
-                  const returnUrl = "/dashboard";
-                  router.push(returnUrl);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          });
+            user2.updateProfile({
+              displayName: values.name
+            }).then(() => {
+              if (true) {
+                const returnUrl = '/dashboard';
+                router.push(returnUrl);
+              } 
+            }).catch((error) => {
+              console.log(error);
+            })
+          })
       } catch (err) {
         console.error(err);
         if (isMounted()) {
@@ -96,34 +83,19 @@ export const FirebaseRegister = (props) => {
     },
   });
 
-  const addUser = async () => {
-    var dataSend = {
-      email: localStorage.getItem("userEmail"),
-      role: localStorage.getItem("role"),
-    };
-  };
-
-  const handleGoogleClick = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   return (
     <div {...props}>
-      <Button
+      {/* <Button
         fullWidth
         onClick={handleGoogleClick}
         size="large"
         sx={{
-          backgroundColor: "common.white",
-          color: "common.black",
-          "&:hover": {
-            backgroundColor: "common.white",
-            color: "common.black",
-          },
+          backgroundColor: 'common.white',
+          color: 'common.black',
+          '&:hover': {
+            backgroundColor: 'common.white',
+            color: 'common.black'
+          }
         }}
         variant="contained"
       >
@@ -137,22 +109,41 @@ export const FirebaseRegister = (props) => {
       </Button>
       <Box
         sx={{
-          alignItems: "center",
-          display: "flex",
-          mt: 2,
+          alignItems: 'center',
+          display: 'flex',
+          mt: 2
         }}
       >
         <Box sx={{ flexGrow: 1 }}>
           <Divider orientation="horizontal" />
         </Box>
-        <Typography color="textSecondary" sx={{ m: 2 }} variant="body1">
+        <Typography
+          color="textSecondary"
+          sx={{ m: 2 }}
+          variant="body1"
+        >
           OR
         </Typography>
         <Box sx={{ flexGrow: 1 }}>
           <Divider orientation="horizontal" />
         </Box>
-      </Box>
-      <form noValidate onSubmit={formik.handleSubmit}>
+      </Box> */}
+      <form
+        noValidate
+        onSubmit={formik.handleSubmit}
+      >
+        <TextField
+          error={Boolean(formik.touched.name && formik.errors.name)}
+          fullWidth
+          helperText={formik.touched.name && formik.errors.name}
+          label="Name"
+          margin="normal"
+          name="name"
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          type="text"
+          value={formik.values.name}
+        />
         <TextField
           error={Boolean(formik.touched.email && formik.errors.email)}
           fullWidth
@@ -179,10 +170,10 @@ export const FirebaseRegister = (props) => {
         />
         <Box
           sx={{
-            alignItems: "center",
-            display: "flex",
+            alignItems: 'center',
+            display: 'flex',
             ml: -1,
-            mt: 2,
+            mt: 2
           }}
         >
           <Checkbox
@@ -190,19 +181,30 @@ export const FirebaseRegister = (props) => {
             name="policy"
             onChange={formik.handleChange}
           />
-          <Typography color="textSecondary" variant="body2">
-            I have read the{" "}
-            <Link component="a" href="#">
+          <Typography
+            color="textSecondary"
+            variant="body2"
+          >
+            I have read the
+            {' '}
+            <Link
+              component="a"
+              href="#"
+            >
               Terms and Conditions
             </Link>
           </Typography>
         </Box>
         {Boolean(formik.touched.policy && formik.errors.policy) && (
-          <FormHelperText error>{formik.errors.policy}</FormHelperText>
+          <FormHelperText error>
+            {formik.errors.policy}
+          </FormHelperText>
         )}
         {formik.errors.submit && (
           <Box sx={{ mt: 3 }}>
-            <FormHelperText error>{formik.errors.submit}</FormHelperText>
+            <FormHelperText error>
+              {formik.errors.submit}
+            </FormHelperText>
           </Box>
         )}
         <Box sx={{ mt: 2 }}>
